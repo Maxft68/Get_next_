@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:38:13 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/02 15:27:26 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:13:11 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 int	exam_the_temp(char *str)
 // CHERCHE dans src \N si oui renvoi jusqua \n et garde le reste/ si non renvoi tout
 {
 	int i;
-	int h;
 	i = 0;
 	
 	while (str[i] != '\0')
@@ -61,30 +61,37 @@ char	*get_next_line(int fd)
 {
 	char		*to_push;
 	static char	*str_temp;
+	int i;
 
 	to_push = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	str_temp = malloc((BUFFER_SIZE + 1)* sizeof(char));
+	i = 0;
 	if (!str_temp)
 		return ("fail");
 	
-	
-	printf("valeur de retour de exam the temp :%d\n", exam_the_temp(str_temp));
-	while ((exam_the_temp(str_temp)) != 777) //777 = Jackpot on continue || 666 = '\n' dans le buffer || 999 == FINI
+	//printf("Test APRES STRLCAT5465");
+	//printf("valeur de retour de exam the temp :%d\n", exam_the_temp(str_temp));
+	while (i <= 3)//(exam_the_temp(str_temp)) != 777) //777 = Jackpot on continue || 666 = '\n' dans le buffer || 999 == FINI
 	{
+		//printf("Test APRES STRLCAT55");
 		read(fd, str_temp, BUFFER_SIZE);
 		exam_the_temp(str_temp);
 		//if ((exam_the_temp(str_temp)) == 777)
 		//{
-			printf("valeur de retour de exam the temp bis :%d\n", exam_the_temp(str_temp));
-			printf("Test str temp: %s\n", str_temp);
-			printf("Test to_push: %s\n", to_push);
-			printf("Test to_push APRES STRLCAT: %s\n", to_push);
-			to_push = str_temp;
+			//printf("valeur de retour de exam the temp bis :%d\n", exam_the_temp(str_temp));
+			//printf("Test str temp: %s\n", str_temp);
+			//printf("Test to_push: %s\n", to_push);
+			//printf("Test to_push APRES STRLCAT: %s\n", to_push);
+			//printf("Test APRES STRLCAT");
+			
+			ft_strlcat_two(to_push, str_temp, BUFFER_SIZE);  // to_push = str_temp;
+			//write(1, to_push, strlen(to_push));
 		//}
-		printf("Test valeur FD:%d\n", fd);
-		printf("Test str temp: %s\n", str_temp);
+		//printf("Test valeur FD:%d\n", fd);
+		//printf("Test str temp: %s\n", str_temp);
+		i++;
 	}
-	return (to_push);
+	return (to_push); //return toute ma str en 1x
 }
 
 int	main(void)
@@ -93,7 +100,7 @@ int	main(void)
 	fd = open("test.txt", O_RDONLY);
 	if (fd == -1)
 		printf("Error opening file");
-	// while (!get_next_line(fd))
+	//get_next_line(fd);
 	printf("ma fonction renvoi: %s", get_next_line(fd));
 	close(fd);
 }
