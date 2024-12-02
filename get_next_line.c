@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:38:13 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/02 16:13:11 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:40:43 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,13 @@ char	*get_next_line(int fd)
 	
 	//printf("Test APRES STRLCAT5465");
 	//printf("valeur de retour de exam the temp :%d\n", exam_the_temp(str_temp));
-	while (i <= 3)//(exam_the_temp(str_temp)) != 777) //777 = Jackpot on continue || 666 = '\n' dans le buffer || 999 == FINI
+	while (read(fd, str_temp, BUFFER_SIZE) == BUFFER_SIZE )//(exam_the_temp(str_temp)) != 777) //777 = Jackpot on continue || 666 = '\n' dans le buffer || 999 == FINI
 	{
 		//printf("Test APRES STRLCAT55");
 		read(fd, str_temp, BUFFER_SIZE);
 		exam_the_temp(str_temp);
 		//if ((exam_the_temp(str_temp)) == 777)
 		//{
-			//printf("valeur de retour de exam the temp bis :%d\n", exam_the_temp(str_temp));
 			//printf("Test str temp: %s\n", str_temp);
 			//printf("Test to_push: %s\n", to_push);
 			//printf("Test to_push APRES STRLCAT: %s\n", to_push);
