@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:46:27 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/05 11:55:53 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/06 11:32:25 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,52 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	s1s2[i] = '\0';
 	return (s1s2);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*alloc;
+
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	if (len > (ft_strlen(s) - start))
+		len = (ft_strlen(s) - start);
+	alloc = malloc(len + 1 * sizeof(char));
+	if (!alloc)
+		return (NULL);
+	ft_strlcpy(alloc, &s[start], len + 1);
+	return (alloc);
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*alloc;
+	size_t	l;
+	size_t	i;
+
+	i = 0;
+	l = ft_strlen(s);
+	alloc = malloc((l + 1) * sizeof(char));
+	if (!alloc)
+		return (NULL);
+	ft_strlcpy(alloc, s, l + 1);
+	return (alloc);
+}
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+
+	i = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (i < (size - 1) && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }
