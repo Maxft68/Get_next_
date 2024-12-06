@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 14:38:13 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/06 17:12:31 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/06 17:20:07 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ char	*get_next_line(int fd)
 		//printf("return de exam_to_check =%d", (exam_to_check(to_check)));
 		if ((exam_to_check(temp)) == 777) //rajoute TOUT temp dans to_push si pas de \n 	OK
 		{
-			//printf("to_push avant = %s\n", to_push);
+			printf("to_push avant = %s\n", to_push);
 			to_push = ft_strjoin(to_push, temp); // copie check dans push
-			//printf("to_push apres = %s\n", to_push);
+			printf("to_push apres = %s\n", to_push);
 		}
 		else if ((exam_to_check(to_push = ft_strjoin(to_push, temp))) == 666) // on renvoi tout puis FIN
 		{
@@ -93,12 +93,13 @@ int	main(void)
 		printf("Error opening file");
 	//get_next_line(fd);
 	printf("1\n%s", get_next_line(fd));
-	printf("2%s\n", get_next_line(fd));
+	/* printf("2%s\n", get_next_line(fd));
 	printf("3%s\n", get_next_line(fd));
 	printf("4%s\n", get_next_line(fd));
 	printf("5%s\n", get_next_line(fd));
 	printf("6%s\n", get_next_line(fd));
-	printf("7%s\n", get_next_line(fd));//7
+	printf("7%s\n", get_next_line(fd)); */
+	//7
 	//printf("ma fonction renvoi:\n%s", get_next_line(fd));
 	//printf("ma fonction renvoi:\n%s", get_next_line(fd));
 	//printf("ma fonction renvoi:\n%s", get_next_line(fd));
