@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: maxoph <maxoph@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:29:28 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/08 15:09:04 by maxoph           ###   ########.fr       */
+/*   Updated: 2024/12/10 13:01:05 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 #endif
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 6
+# define BUFFER_SIZE 8
 #endif
 
-#include <fcntl.h>
-#include <stddef.h>
-#include <stdio.h>
+#include <fcntl.h> // ?
+#include <stddef.h>// ?
+#include <stdio.h> // ?
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h> // ?
 
 char	*get_next_line(int fd);
 int		exam_to_check(char *str);

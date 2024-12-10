@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:46:27 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/06 11:32:25 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:47:20 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		j;
 	char	*s1s2;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
 	s1s2 = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!s1s2)
