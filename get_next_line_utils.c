@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:46:27 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/09 15:47:20 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:29:31 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	if (!s)
+		return (0);
+	while (s && s[i])
 		i++;
 	return (i);
 }
@@ -35,17 +37,17 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	i = 0;
 	j = 0;
+	if (!s1)
+		return (ft_strdup(s2));
 	while (s1[i])
 	{
 		s1s2[i] = s1[i];
 		i++;
 	}
 	while (s2[j])
-	{
-		s1s2[i++] = s2[j];
-		j++;
-	}
+		s1s2[i++] = s2[j++];
 	s1s2[i] = '\0';
+	free((void *)s1);
 	return (s1s2);
 }
 
@@ -59,7 +61,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	if (len > (ft_strlen(s) - start))
 		len = (ft_strlen(s) - start);
-	alloc = malloc(len + 1 * sizeof(char));
+	alloc = malloc((len + 1) * sizeof(char));
 	if (!alloc)
 		return (NULL);
 	ft_strlcpy(alloc, &s[start], len + 1);
@@ -70,9 +72,9 @@ char	*ft_strdup(const char *s)
 {
 	char	*alloc;
 	size_t	l;
-	size_t	i;
 
-	i = 0;
+	if (!s)
+        return (NULL);
 	l = ft_strlen(s);
 	alloc = malloc((l + 1) * sizeof(char));
 	if (!alloc)
@@ -88,6 +90,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	i = 0;
 	if (size == 0)
 		return (ft_strlen(src));
+	if (!dst)
+		dst = ft_strdup("");
 	while (i < (size - 1) && src[i])
 	{
 		dst[i] = src[i];

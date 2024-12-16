@@ -5,52 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/10 12:58:15 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/10 17:32:56 by mdsiurds         ###   ########.fr       */
+/*   Created: 2024/12/16 17:58:33 by mdsiurds          #+#    #+#             */
+/*   Updated: 2024/12/16 19:50:32 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*read_to_static(int fd, char *to_save) // read et rajoute la lecture a ma statique
+int	ft_strchr(const char *s, int c)
 {
-	char *temp_read_to_save;
-	char *temp_read;
-	int bytes_read;
-	
-	temp_read = "";
-	bytes_read = 0;
+	size_t i;
 
-	if (ft_strchr(to_save, '\n') == 23)// si pas de /n dans ma static je read sinon non.
-		bytes_read = read(fd, temp_read, BUFFER_SIZE);
-	if (bytes_read == -1)
-		return ("fail read");// NULL
-	if (bytes_read == 0 && to_save[0] == '\0')// plus rien a lire et plus rien a ecrire
-		return ("NULL ??");
-	if (bytes_read != BUFFER_SIZE);
-	to_save = ft_strjoin(to_save, temp_read);
-		return (to_save);
+	i = 0;
+	while (i < ft_strlen(s))
+	{
+		if (s[i] != (char)c)
+			i++;
+		else
+			return (i);
+	}
+	if (s[i] == (char)c)
+		return (i);
+	return (-1);
 }
 
-int	main(void)
+char *split_save_push(char *to_push, char **to_save)
 {
-	int fd;
+	int x;
+	
+	x = ft_strchr(to_push, '\n');
+	*to_save = ft_substr(to_push, (x + 1), ft_strlen(to_push));
+	to_push = ft_substr(to_push, 0, x);
+	return (to_push);
+}
+char	*load_untill_line(int fd, char *to_push, char *to_save)
+{
+	int bytes_read;
+	char temp_read[BUFFER_SIZE + 1];
 
-	fd = open("test.txt", O_RDONLY);
-	if (fd == -1)
-		printf("Error opening file");
-	// get_next_line(fd);
-	printf("1ere fois 	=>%s", get_next_line(fd));
-	printf("2e fois 	=>%s", get_next_line(fd));
-	printf("3e fois 	=>%s", get_next_line(fd));
-	printf("4e fois			%s", get_next_line(fd));
-	/* printf("5e fois			%s", get_next_line(fd));
-	printf("6e fois			%s", get_next_line(fd));
-	printf("7e fois			%s", get_next_line(fd));
-	printf("8e fois			%s", get_next_line(fd));
-	printf("9e fois			%s", get_next_line(fd));
-	printf("10e fois 		%s", get_next_line(fd));
-	printf("11e fois 		%s", get_next_line(fd));
-	printf("12e fois 		%s", get_next_line(fd)); */
-	close(fd);
+	bytes_read = 1;
+	while (bytes_read >= 0 && (ft_strchr(to_push, '\n') != -1))
+	{
+		bytes_read = read(fd, temp_read, BUFFER_SIZE);
+		if (bytes_read < 0)
+		{
+			exit_and_free_all(to_push, to_save); //free tout ce qui a ete malloc et return null
+		}
+		temp_read[bytes_read] = '\0';
+		to_push = ft_strjoin(to_push, temp_read);
+	}
+	return (to_push);
+}
+
+char *get_next_line(int fd)
+{
+
+	char *to_push;
+	static char *to_save = NULL;
+	char *tmp;
+
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	to_push = ft_strdup("");
+	if (ft_strchr(to_save, '\n') != -1)
+		to_push = split_save_push(to_push, &to_save);
+	else
+	{
+		to_push = load_untill_line(fd, to_push, to_save);
+		tmp = split_save_push(to_push, &to_save);
+		free(to_push);
+		to_push = tmp; 
+	}
+	if (to_push[0] == '\0')
+	{
+		free(to_push);
+		to_push = NULL;
+	}
+	return (to_push);
 }
