@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:46:27 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/16 16:29:31 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:39:30 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -34,7 +34,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	s1s2 = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!s1s2)
-		return (NULL);
+		return (free_all(s1));
 	i = 0;
 	j = 0;
 	if (!s1)
@@ -47,7 +47,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[j])
 		s1s2[i++] = s2[j++];
 	s1s2[i] = '\0';
-	free((void *)s1);
+	//free_all(s1); ENLEVE DES LEAKS MAIS FONCTIONNE PLUS free() invalid size
 	return (s1s2);
 }
 
@@ -90,8 +90,8 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	i = 0;
 	if (size == 0)
 		return (ft_strlen(src));
-	if (!dst)
-		dst = ft_strdup("");
+	/* if (!dst)
+		dst = ft_strdup(""); */
 	while (i < (size - 1) && src[i])
 	{
 		dst[i] = src[i];

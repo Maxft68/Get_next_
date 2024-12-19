@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:12:18 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/16 19:26:07 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:34:14 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,41 @@
 	close(fd);
 } */
 #include <stdio.h>
-
-int main(int argc, char **argv)
+/*
+int main(void)
 {
     char *line;
     int fd;
+	int i;
 
-    fd = open(argv[1], O_RDONLY);
+    fd = open("empty.txt", O_RDONLY);
     line = get_next_line(fd);
-
-    while (line)
+	i = 1;
+    while (line && i < 50)
     {
-        printf("%s", line);
+        printf("%d> %s         ",i, line);
         free(line);
         line = get_next_line(fd);
+		i++;
+    }
+    printf("%s", line);
+    close(fd);
+    return(0);
+}
+*/
+int main(void)
+{
+    char *line;
+    int fd;
+	int i;
 
+    fd = open("empty.txt", O_RDONLY);
+    i = 1;
+    while (i < 10)
+    {
+        line = get_next_line(fd);
+		printf("APPEL%d =%s\n",i++, line);
+        free(line);
     }
     close(fd);
     return(0);

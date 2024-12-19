@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:29:28 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/16 17:20:20 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/19 16:30:04 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #endif
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 8
+# define BUFFER_SIZE 12
 #endif
 
 #include <fcntl.h> // ?
@@ -26,10 +26,14 @@
 #include <string.h> // ?
 
 char	*get_next_line(int fd);
-int		exam_to_check(char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+//void    exit_and_free_all(char *to_push, char *to_save);
+//char    *maj_save_push(char *to_push, char **to_save);
+char *maj_return_line(char **to_save);
+char    *free_all(char *s);
+//char	*read_untill_newline(int fd, char *to_push, char *to_save);
+char	*read_untill_newline(int fd, char *to_save);
+char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-//char    *read_to_static(int fd, char *to_save);
