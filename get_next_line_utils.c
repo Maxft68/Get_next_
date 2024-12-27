@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 11:46:27 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/19 15:39:30 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2024/12/27 13:32:06 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	while (s2[j])
 		s1s2[i++] = s2[j++];
 	s1s2[i] = '\0';
-	//free_all(s1); ENLEVE DES LEAKS MAIS FONCTIONNE PLUS free() invalid size
+	free_all(s1); //ENLEVE DES LEAKS MAIS FONCTIONNE PLUS free() invalid size
 	return (s1s2);
 }
 
