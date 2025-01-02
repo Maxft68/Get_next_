@@ -6,18 +6,23 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:48:34 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/01/02 14:07:07 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:52:33 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	free_all(char	**s)
+void	free_all(char	**s, char **s1)
 {
 	if (s && *s)
 	{
 		free(*s);
 		*s = NULL;
+	}
+	if (s1 && *s1)
+	{
+		free(*s1);
+		*s1 = NULL;
 	}
 }
 
@@ -42,13 +47,14 @@ char *get_next_line(int fd)
 	static char *to_save = NULL;
 	char *temp_read;
 	char *temp_save;
+	int newline_index;
 	int bytes_read;
 	char *line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 ||
 	!(temp_read = malloc((BUFFER_SIZE + 1) * sizeof(char))))
 	{
-		free_all(&to_save);
+		free_all(&to_save, NULL);
 		return (NULL);
 	}
 	bytes_read = 1;
@@ -56,35 +62,26 @@ char *get_next_line(int fd)
 	{
 		if ((bytes_read = read(fd, temp_read, BUFFER_SIZE)) < 0)
 		{
-			free_all(&temp_read);
-			free_all(&to_save);
+			free_all(&to_save, &temp_read);
 			return (NULL);
 		}
 		if (bytes_read == 0)
 			break;
 		temp_read[bytes_read] = '\0';
-		//to_save = ft_strjoin(to_save, temp_read);
 		temp_save = ft_strjoin(to_save, temp_read);
-		free_all(&to_save);
+		free_all(&to_save, NULL);
 		to_save = temp_save;
 		if (ft_strchr(temp_read, '\n') != -1)
 			break;
 	}
-	free_all(&temp_read);
+	free_all(&temp_read, NULL);
 	if (!to_save || !*to_save)
 		return (NULL);
-	int newline_index = ft_strchr(to_save, '\n');
-	if (newline_index == -1)
+	if ((newline_index = ft_strchr(to_save, '\n')) == -1)
+		return(line = to_save,to_save = NULL, line); //line = to_save to_save = NULL return (line);
+	if (!(line = ft_substr(to_save, 0, newline_index + 1)))
 	{
-		line = to_save;
-		to_save = NULL;
-		return (line);
-	}
-	line = ft_substr(to_save, 0, newline_index + 1);
-	if (!line)
-	{
-		free_all(&temp_read);
-		free_all(&to_save);
+		free_all(&temp_read, &to_save);
 		return (NULL);
 	}
 	char *new_to_save = NULL;
@@ -92,21 +89,14 @@ char *get_next_line(int fd)
 	{
 		char *start = &to_save[newline_index + 1];
 		char *temp = start;
-		/* size_t len = 0;
-		
-		while (*temp++)
-			len++; */
-		
-		new_to_save = malloc(((ft_strlen(temp)) + 1) * sizeof(char));
-		if (!new_to_save)
+		if (!(new_to_save = malloc(((ft_strlen(temp)) + 1) * sizeof(char))))
 		{
-			free_all(&line);
-			free_all(&to_save);
+			free_all(&to_save, &line);
 			return (NULL);
 		}
 		ft_strlcpy(new_to_save, start, ft_strlen(temp) + 1);
 	}
-	free_all(&to_save);
+	free_all(&to_save, NULL);
 	to_save = new_to_save;
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 09:29:28 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/01/02 10:49:46 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/01/02 15:54:09 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 char	*get_next_line(int fd);
 char	*maj_return_line(char **to_save);
-void	free_all(char **s);
+void	free_all(char **s, char **s1);
 char	*read_untill_newline(int fd, char *to_save);
 char	*ft_strjoin(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
