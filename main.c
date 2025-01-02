@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:12:18 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/19 16:34:14 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/01/02 10:12:25 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int main(void)
     while (i < 10)
     {
         line = get_next_line(fd);
-		printf("APPEL%d =%s\n",i++, line);
+		printf("APPEL%d =%s",i++, line);
         free(line);
     }
     close(fd);

@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:58:33 by mdsiurds          #+#    #+#             */
-/*   Updated: 2024/12/27 15:56:26 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/01/02 12:43:38 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	s1s2 = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!s1s2)
-		return (free_all(s1));
+		return (free_all);
 	i = 0;
 	j = 0;
 	if (!s1)
@@ -201,7 +201,7 @@ char	*read_untill_newline(int fd, char *to_save)
 	}
 } */
 
-char	*free_all(char	*s)
+char	*free_all(char	**s)
 {
 	free(s);
 	s = NULL;
