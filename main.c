@@ -6,7 +6,7 @@
 /*   By: mdsiurds <mdsiurds@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:12:18 by mdsiurds          #+#    #+#             */
-/*   Updated: 2025/01/02 10:12:25 by mdsiurds         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:43:52 by mdsiurds         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int main(void)
 
     fd = open("empty.txt", O_RDONLY);
     i = 1;
-    while (i < 10)
-    {
+    //while (i < 10)
+    //{
         line = get_next_line(fd);
 		printf("APPEL%d =%s",i++, line);
         free(line);
-    }
+	//}
     close(fd);
     return(0);
 }
